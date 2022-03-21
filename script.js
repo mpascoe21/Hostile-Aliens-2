@@ -27,7 +27,7 @@ class Ship {
   }
 
   renderShip() {
-    return `<div class='ship' data-id=${this.id}>
+    return `<div class='ship' id=${this.id}>
       <h3>${this.name}</h3>
       <p>${this.id}</p>
       <p class='startPoints'>${this.startPoints}</p>
@@ -35,42 +35,48 @@ class Ship {
   }
 }
 
+const allShipsContainer = document.querySelector("#allShipsContainer");
+console.log(allShipsContainer);
+// allShipsContainer.removeChild(allShipsContainer.children[0]);
+// console.log(allShipsContainer);
+
 let shipsArr = [];
 
 const motherShip = new Ship("Mother Ship", 100, 9, "S-" + 1);
 shipsArr.push(motherShip);
-document.querySelector("#allShipsContainer").innerHTML +=
-  motherShip.renderShip();
+allShipsContainer.innerHTML += motherShip.renderShip();
 console.log(motherShip);
 
 for (let i = 0; i < 5; i++) {
   const defenceShip = new Ship("Defence Ship", 80, 10, "S-" + (i + 2));
   shipsArr.push(defenceShip);
-  document.querySelector("#allShipsContainer").innerHTML +=
-    defenceShip.renderShip();
+  allShipsContainer.innerHTML += defenceShip.renderShip();
   console.log(defenceShip);
 }
 
 for (let i = 0; i < 8; i++) {
   const attackShip = new Ship("Attack Ship", 45, 12, "S-" + (i + 7));
   shipsArr.push(attackShip);
-  document.querySelector("#allShipsContainer").innerHTML +=
-    attackShip.renderShip();
+  allShipsContainer.innerHTML += attackShip.renderShip();
   console.log(attackShip);
 }
 
 console.log(shipsArr);
 console.log(shipsArr[0].name); //mother ship
 
-const allShipsHTML = document.querySelectorAll(".ship");
-console.log(allShipsHTML);
+// const allShipsHTML = document.querySelectorAll(".ship");
+// console.log(allShipsHTML);
+// const allShipsHTMLArr = Array.from(allShipsHTML);
+// console.log(allShipsHTMLArr);
+
+// console.log(allShipsHTMLArr[0]);
 
 const getRandomShip = () => {
-  return Math.floor(Math.random() * allShipsHTML.length);
+  return Math.floor(Math.random() * shipsArr.length);
 };
 getRandomShip();
 
-// console.log(getRandomShip()); // 7
+//console.log(getRandomShip()); // 7
 // console.log(allShipsHTML[getRandomShip()].children[1].innerHTML); // S-2
 // console.log(allShipsHTML[getRandomShip()]); // div with id S-8
 
@@ -79,25 +85,61 @@ getRandomShip();
 // console.log(allShipsHTML[randomShipIndex].children[1].innerHTML);
 // console.log(allShipsHTML[randomShipIndex]);
 
-//let remainingPoints = shipsArr[].remainingPoints()
 //
 const hitRandomShip = () => {
   button.addEventListener("click", () => {
+    console.log(shipsArr);
     const randomShipIndex = getRandomShip();
-    console.log(randomShipIndex);
+    console.log(randomShipIndex + "  randomShipIndex");
     const currentShip = shipsArr[randomShipIndex];
     console.log(currentShip);
+    console.log(currentShip.id + "  currentShip.id");
+    // const HTMLShip = allShipsHTMLArr[randomShipIndex];
+    // console.log(HTMLShip.children[1]);
+
+    // const hitHTMLShip = allShipsHTMLArr.filter(
+    //   (ship) => ship.children[1].innerHTML === currentShip.id
+    // );
+    // console.log(hitHTMLShip);
+    // console.log(hitHTMLShip[0].children[1].innerHTML + "  html id");
+    // //console.log(allShipsHTMLArr);
 
     const hitShipRemainingPoints = currentShip.remainingPoints();
-    console.log(hitShipRemainingPoints);
+    console.log(hitShipRemainingPoints + "  hit ship remaining points");
 
-    // console.log(allShipsHTML[randomShipIndex]);
+    shipsArr.splice(randomShipIndex, 1);
+    console.log(shipsArr);
+
+    // allShipsHTML[randomShipIndex].children[2].innerHTML =
+    //   hitShipRemainingPoints;
+
+    //console.log(allShipsHTMLArr);
+
+    //console.log(allShipsHTMLArr[randomShipIndex]);
+    //console.log(allShipsHTMLArr[randomShipIndex].innerHTML);
     // console.log(allShipsHTML[randomShipIndex].children[0].innerHTML);
-    // console.log(allShipsHTML[randomShipIndex].children[1].innerHTML);
+    //console.log(allShipsHTMLArr[randomShipIndex].children[1].innerHTML);
     // console.log(allShipsHTML[randomShipIndex].children[2].innerHTML);
 
-    allShipsHTML[randomShipIndex].children[2].innerHTML =
-      hitShipRemainingPoints;
+    const HTMLShipToRemove = document.getElementById(currentShip.id);
+    console.log(HTMLShipToRemove);
+    HTMLShipToRemove.remove();
+
+    //console.log(allShipsHTMLArr);
+
+    // allShipsHTMLArr.splice(hitHTMLShip, 1);
+    // console.log(allShipsHTMLArr);
+
+    //hitHTMLShip[0].children[0].innerHTML = "dead";
+
+    // if (hitShipRemainingPoints <= 40) {
+    //   //HTMLShipToRemove.innerHTML = "Dead";
+    //   shipsArr.splice(randomShipIndex, 1);
+    //   allShipsHTMLArr.splice(randomShipIndex, 1);
+
+    //   console.log(shipsArr);
+    //   console.log(allShipsHTMLArr);
+    // }
   });
 };
 hitRandomShip();
