@@ -13,6 +13,11 @@
 //console.dir(document);
 //console.log("working");
 const button = document.querySelector(".button");
+//button.addEventListener('click', ())
+const allShipsContainer = document.querySelector("#allShipsContainer");
+console.log(allShipsContainer);
+
+//allShipsContainer.innerHTML === "";
 
 class Ship {
   constructor(name, startPoints, hitPoints, id) {
@@ -35,169 +40,109 @@ class Ship {
   }
 }
 
-const allShipsContainer = document.querySelector("#allShipsContainer");
-console.log(allShipsContainer);
-// allShipsContainer.removeChild(allShipsContainer.children[0]);
-// console.log(allShipsContainer);
-
 let shipsArr = [];
 
-const motherShip = new Ship("Mother Ship", 100, 9, "S-" + 1);
-shipsArr.push(motherShip);
-allShipsContainer.innerHTML += motherShip.renderShip();
-console.log(motherShip);
+const buildGame = () => {
+  const motherShip = new Ship("Mother Ship", 100, 9, "S-" + 1);
+  shipsArr.push(motherShip);
+  allShipsContainer.innerHTML += motherShip.renderShip();
+  console.log(motherShip);
 
-for (let i = 0; i < 5; i++) {
-  const defenceShip = new Ship("Defence Ship", 80, 10, "S-" + (i + 2));
-  shipsArr.push(defenceShip);
-  allShipsContainer.innerHTML += defenceShip.renderShip();
-  console.log(defenceShip);
-}
+  for (let i = 0; i < 5; i++) {
+    const defenceShip = new Ship("Defence Ship", 80, 10, "S-" + (i + 2));
+    shipsArr.push(defenceShip);
+    allShipsContainer.innerHTML += defenceShip.renderShip();
+    console.log(defenceShip);
+  }
 
-for (let i = 0; i < 8; i++) {
-  const attackShip = new Ship("Attack Ship", 45, 12, "S-" + (i + 7));
-  shipsArr.push(attackShip);
-  allShipsContainer.innerHTML += attackShip.renderShip();
-  console.log(attackShip);
-}
+  for (let i = 0; i < 8; i++) {
+    const attackShip = new Ship("Attack Ship", 45, 12, "S-" + (i + 7));
+    shipsArr.push(attackShip);
+    allShipsContainer.innerHTML += attackShip.renderShip();
+    console.log(attackShip);
+  }
 
-console.log(shipsArr);
-console.log(shipsArr[0].name); //mother ship
-
-// const allShipsHTML = document.querySelectorAll(".ship");
-// console.log(allShipsHTML);
-// const allShipsHTMLArr = Array.from(allShipsHTML);
-// console.log(allShipsHTMLArr);
-
-// console.log(allShipsHTMLArr[0]);
-
+  console.log(shipsArr);
+};
 const getRandomShip = () => {
   return Math.floor(Math.random() * shipsArr.length);
 };
-getRandomShip();
+//getRandomShip();
 
-//console.log(getRandomShip()); // 7
-// console.log(allShipsHTML[getRandomShip()].children[1].innerHTML); // S-2
-// console.log(allShipsHTML[getRandomShip()]); // div with id S-8
-
-// const randomShipIndex = getRandomShip();
-// console.log(randomShipIndex);
-// console.log(allShipsHTML[randomShipIndex].children[1].innerHTML);
-// console.log(allShipsHTML[randomShipIndex]);
-
-//
 const hitRandomShip = () => {
-  button.addEventListener("click", () => {
-    console.log(shipsArr);
-    const randomShipIndex = getRandomShip();
-    console.log(randomShipIndex + "  randomShipIndex");
-    const currentShip = shipsArr[randomShipIndex];
-    console.log(currentShip);
-    console.log(currentShip.id + "  currentShip.id");
-    // const HTMLShip = allShipsHTMLArr[randomShipIndex];
-    // console.log(HTMLShip.children[1]);
+  //button.innerText = "Shoot";
+  //button.addEventListener("click", () => {
+  console.log(shipsArr);
+  const randomShipIndex = getRandomShip();
+  console.log(randomShipIndex + "  randomShipIndex");
+  const currentShip = shipsArr[randomShipIndex];
+  console.log(currentShip);
+  console.log(currentShip.id + "  currentShip.id");
+  const HTMLShip = document.getElementById(currentShip.id);
+  console.log(HTMLShip);
 
-    // const hitHTMLShip = allShipsHTMLArr.filter(
-    //   (ship) => ship.children[1].innerHTML === currentShip.id
-    // );
-    // console.log(hitHTMLShip);
-    // console.log(hitHTMLShip[0].children[1].innerHTML + "  html id");
-    // //console.log(allShipsHTMLArr);
+  const hitShipRemainingPoints = currentShip.remainingPoints();
+  console.log(hitShipRemainingPoints + "  hit ship remaining points");
 
-    const hitShipRemainingPoints = currentShip.remainingPoints();
-    console.log(hitShipRemainingPoints + "  hit ship remaining points");
+  HTMLShip.children[2].innerHTML = hitShipRemainingPoints;
 
+  if (hitShipRemainingPoints <= 40) {
     shipsArr.splice(randomShipIndex, 1);
     console.log(shipsArr);
-
-    // allShipsHTML[randomShipIndex].children[2].innerHTML =
-    //   hitShipRemainingPoints;
-
-    //console.log(allShipsHTMLArr);
-
-    //console.log(allShipsHTMLArr[randomShipIndex]);
-    //console.log(allShipsHTMLArr[randomShipIndex].innerHTML);
-    // console.log(allShipsHTML[randomShipIndex].children[0].innerHTML);
-    //console.log(allShipsHTMLArr[randomShipIndex].children[1].innerHTML);
-    // console.log(allShipsHTML[randomShipIndex].children[2].innerHTML);
 
     const HTMLShipToRemove = document.getElementById(currentShip.id);
     console.log(HTMLShipToRemove);
     HTMLShipToRemove.remove();
+  }
 
-    //console.log(allShipsHTMLArr);
+  console.log(allShipsContainer);
 
-    // allShipsHTMLArr.splice(hitHTMLShip, 1);
-    // console.log(allShipsHTMLArr);
-
-    //hitHTMLShip[0].children[0].innerHTML = "dead";
-
-    // if (hitShipRemainingPoints <= 40) {
-    //   //HTMLShipToRemove.innerHTML = "Dead";
-    //   shipsArr.splice(randomShipIndex, 1);
-    //   allShipsHTMLArr.splice(randomShipIndex, 1);
-
-    //   console.log(shipsArr);
-    //   console.log(allShipsHTMLArr);
-    // }
-  });
+  gameOver();
+  // if (shipsArr.length === 0) {
+  //   allShipsContainer.innerHTML = `<h1 class="gameOver">GAME OVER</h1>`;
+  //   //allShipsContainer.innerHTML = "game over";
+  //   button.innerHTML = "Play again";
+  //   button.removeAttribute("onclick");
+  //   button.setAttribute("onclick", "startGame()");
+  // }
+  //});
 };
-hitRandomShip();
 
-// const hitRandomShip = () => {
-//   button.addEventListener("click", () => {
-//     const randomShipIndex = Math.floor(Math.random() * shipsArr.length);
-//     const randomShipId = shipsArr[randomShipIndex].id;
-//     // console.log(randomShipIndex.querySelector(randomShipId));
-//     console.log(`Ship ID is: ${randomShipId}`);
+const gameOver = () => {
+  if (shipsArr.length === 0) {
+    allShipsContainer.innerHTML = `<h1 class="gameOver">GAME OVER</h1>`;
+    //allShipsContainer.innerHTML = "game over";
+    button.innerHTML = "Play again";
+    button.removeAttribute("onclick");
+    button.setAttribute("onclick", "startGame()");
+  }
+};
 
-//     //const currentShipHTML = document.body.dataset.id === randomShipId;
-//     console.log(randomShipIndex);
+const startGame = () => {
+  allShipsContainer.innerHTML = "";
+  //button.addEventListener("click", (event) => {
+  const launchMessage = document.querySelector(".launchMessage");
+  launchMessage.innerHTML = "";
 
-//     // const shipNode = document.querySelector()
-//     // console.log(randomShipIndex);
-//     // console.log(shipsArr[randomShipIndex].startPoints);
-//     // console.log(shipsArr[randomShipIndex].hitPoints);
-//     //console.log(shipsArr[randomShipIndex]);
+  buildGame();
+  // buildGameArr();
+  getRandomShip();
+  button.innerHTML = "Shoot";
+  button.removeAttribute("onclick");
+  button.setAttribute("onclick", "hitRandomShip()");
+  //hitRandomShip();
 
-//     let remainingPoints = shipsArr[randomShipIndex].remainingPoints();
-//     console.log(
-//       `Ship Index: ${shipsArr[randomShipIndex].id}, Points remainining: ${remainingPoints}`
-//     );
+  //button.removeEventListener("click", event);
+  // });
+};
+// startGame();
 
-//     // let remainingPoints =
-//     //   shipsArr[randomShipIndex].startPoints -
-//     //   shipsArr[randomShipIndex].hitPoints;
-
-//     // const motherShip = shipsArr[0].id === "S-1";
-
-//     // if (motherShip === true && remainingPoints <= 0) {
-//     //   document.querySelector("#allShipsContainer").innerHTML = "GAME OVER";
-//     // } else
-//     if (remainingPoints <= 30) {
-//       shipsArr.splice(randomShipIndex, 1);
-
-//       // document.querySelector("#allShipsContainer")[randomShipIndex].innerHTML =
-//       //   "";
-
-//       console.log(shipsArr);
-//     } else {
-//       shipsArr[randomShipIndex].startPoints = remainingPoints;
-//       // console.log(shipsArr[randomShipIndex].startPoints);
-//     }
-
-//     // document.querySelector(".startPoints").innerHTML = remainingPoints;
-//   });
+// const gameOver = () => {
+//   if (shipsArr.length === 0) {
+//     //button.removeEventListener("click", event);
+//     allShipsContainer.innerHTML = `<h1 class="gameOver">GAME OVER</h1>`;
+//     button.innerHTML = "Play again";
+//     //button.addEventListener("click", startGame);
+//   }
 // };
-// hitRandomShip();
-
-// // const currentShipPoints = document.querySelector(".startPoints").innerHTML;
-// // console.log(currentShipPoints);
-
-// // const allShipsArr = allShips.childNodes;
-// // // allShipsArr.push(motherShip, defenceShip);
-// // console.log(allShipsArr);
-
-// // class MotherShip {
-// //   // MOTHER SHIP DESTROYED = ALL SHIPS DESTROYED -> GAME OVER
-// // }
+// gameOver();
