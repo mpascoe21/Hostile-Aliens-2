@@ -1,5 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 * {
   text-align: center;
+  font-family: helvetica, arial, sans-serif;
+}
+
+.game-container {
+  margin: 20px;
+}
+
+h1 {
+  margin: 50px 0;
+  font-size: 48px;
+  color: #4c00ff;
+  font-family: "Press Start 2P", helvetica, arial, sans-serif;
+}
+
+.launchMessage {
+  font-size: 32px;
+  line-height: 175%;
 }
 
 #allShipsContainer {
@@ -18,8 +36,9 @@
 .gameOver {
   margin: auto;
   padding-top: 30px;
-  color: blue;
+  color: #ffd000;
   font-size: 48px;
+  font-family: "Press Start 2P", helvetica, arial, sans-serif;
 }
 
 .button {
