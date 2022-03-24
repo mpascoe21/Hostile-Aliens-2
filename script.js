@@ -38,6 +38,12 @@ class Ship {
     return (this.startPoints = this.startPoints - this.hitPoints);
   }
 
+  // destroyMotherShip() {
+  //   if (this.name === "Mother Ship" && this.startPoints <= 0) {
+  //     shipsArr = [];
+  //   }
+  // }
+
   renderShip() {
     return `<div class="ship" id="${this.id}">
       <h3>${this.name}</h3>
@@ -74,8 +80,6 @@ const buildGame = () => {
 const getRandomShip = () => {
   return Math.floor(Math.random() * shipsArr.length);
 };
-console.log(getRandomShip);
-//getRandomShip();
 
 const hitRandomShip = () => {
   //console.log(shipsArr);
@@ -95,6 +99,7 @@ const hitRandomShip = () => {
   if (currentShip.id === "S-1" && hitShipRemainingPoints <= 0) {
     shipsArr = [];
   }
+  //destroyMotherShip();
 
   if (hitShipRemainingPoints <= 0) {
     shipsArr.splice(randomShipIndex, 1);
