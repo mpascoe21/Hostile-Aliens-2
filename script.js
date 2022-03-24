@@ -74,6 +74,7 @@ const buildGame = () => {
 const getRandomShip = () => {
   return Math.floor(Math.random() * shipsArr.length);
 };
+console.log(getRandomShip);
 //getRandomShip();
 
 const hitRandomShip = () => {
@@ -91,7 +92,11 @@ const hitRandomShip = () => {
 
   HTMLShip.children[2].innerHTML = hitShipRemainingPoints;
 
-  if (hitShipRemainingPoints <= 40) {
+  if (currentShip.id === "S-1" && hitShipRemainingPoints <= 0) {
+    shipsArr = [];
+  }
+
+  if (hitShipRemainingPoints <= 0) {
     shipsArr.splice(randomShipIndex, 1);
     //console.log(shipsArr);
     const HTMLShipToRemove = document.getElementById(currentShip.id);
