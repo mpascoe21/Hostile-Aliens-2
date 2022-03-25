@@ -10,18 +10,6 @@
 
 // MOTHER SHIP DESTROYED = ALL SHIPS DESTROYED -> GAME OVER
 
-//console.dir(document);
-//console.log("working");
-
-// import {
-//   buildGame,
-//   getRandomShip,
-//   hitRandomShip,
-//   gameOver,
-//   startGame,
-// } from "./functions.js";
-// import { Ship } from "./shipClass.js";
-
 const button = document.querySelector(".button");
 const allShipsContainer = document.querySelector("#allShipsContainer");
 console.log(allShipsContainer);
@@ -37,12 +25,6 @@ class Ship {
   remainingPoints() {
     return (this.startPoints = this.startPoints - this.hitPoints);
   }
-
-  // destroyMotherShip() {
-  //   if (this.name === "Mother Ship" && this.startPoints <= 0) {
-  //     shipsArr = [];
-  //   }
-  // }
 
   renderShip() {
     return `<div class="ship" id="${this.id}">
@@ -82,30 +64,19 @@ const getRandomShip = () => {
 };
 
 const hitRandomShip = () => {
-  //console.log(shipsArr);
   const randomShipIndex = getRandomShip();
-  //console.log(randomShipIndex + "  randomShipIndex");
   const currentShip = shipsArr[randomShipIndex];
-  //console.log(currentShip);
-  //console.log(currentShip.id + "  currentShip.id");
   const HTMLShip = document.getElementById(currentShip.id);
-  //console.log(HTMLShip);
-
   const hitShipRemainingPoints = currentShip.remainingPoints();
-  //console.log(hitShipRemainingPoints + "  hit ship remaining points");
-
   HTMLShip.children[2].innerHTML = hitShipRemainingPoints;
 
   if (currentShip.id === "S-1" && hitShipRemainingPoints <= 0) {
     shipsArr = [];
   }
-  //destroyMotherShip();
 
   if (hitShipRemainingPoints <= 0) {
     shipsArr.splice(randomShipIndex, 1);
-    //console.log(shipsArr);
     const HTMLShipToRemove = document.getElementById(currentShip.id);
-    //console.log(HTMLShipToRemove);
     HTMLShipToRemove.remove();
   }
   gameOver();
