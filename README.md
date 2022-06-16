@@ -9,6 +9,8 @@ To Create a simple text only game with a single button and basic styling.
 - You shoould be able to start a new game once the game is over.
 - Points are deducted from each ship when hit.
 
+### 🌐 Check out the project [here](https://mpascoe21.github.io/Hostile-Aliens-2/)
+
 <br>
 
 <img src="https://media.giphy.com/media/KPaKL0tBATrJSQ3rJc/giphy.gif"/>
